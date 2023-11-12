@@ -18,6 +18,11 @@
 
 [![Library][library-screenshot]](https://music.qier222.com)
 
+
+## 全新版本
+全新2.0 Alpha测试版已发布，欢迎前往 [Releases](https://github.com/qier222/YesPlayMusic/releases) 页面下载。
+当前版本将会进入维护模式，除重大bug修复外，不会再更新新功能。
+
 ## ✨ 特性
 
 - ✅ 使用 Vue.js 全家桶开发
@@ -37,6 +42,7 @@
 - 🟥 支持 Last.fm Scrobble
 - ☁️ 支持音乐云盘
 - ⌨️ 自定义快捷键和全局快捷键
+- 🎧 支持 Mpris
 - 🛠 更多特性开发中
 
 ## 📦️ 安装
@@ -46,11 +52,17 @@ Electron 版本由 [@hawtim](https://github.com/hawtim) 和 [@qier222](https://g
 访问本项目的 [Releases](https://github.com/qier222/YesPlayMusic/releases)
 页面下载安装包。
 
-macOS 用户也可以通过 `brew install --cask yesplaymusic` 来安装。
+- macOS 用户可以通过 Homebrew 来安装：`brew install --cask yesplaymusic`
+
+- Windows 用户可以通过 Scoop 来安装：`scoop install extras/yesplaymusic`
 
 ## ⚙️ 部署至 Vercel
 
 除了下载安装包使用，你还可以将本项目部署到 Vercel 或你的服务器上。下面是部署到 Vercel 的方法。
+
+本项目的 Demo (https://music.qier222.com) 就是部署在 Vercel 上的网站。
+
+[![Powered by Vercel](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)](https://vercel.com/?utm_source=ohmusic&utm_campaign=oss)
 
 1. 部署网易云 API，详情参见 [Binaryify/NeteaseCloudMusicApi](https://neteasecloudmusicapi.vercel.app/#/?id=%e5%ae%89%e8%a3%85)
    。你也可以将 API 部署到 Vercel。
@@ -87,7 +99,7 @@ macOS 用户也可以通过 `brew install --cask yesplaymusic` 来安装。
 2. 克隆本仓库
 
 ```sh
-git clone https://github.com/qier222/YesPlayMusic.git
+git clone --recursive https://github.com/qier222/YesPlayMusic.git
 ```
 
 3. 安装依赖
@@ -135,6 +147,24 @@ docker-compose up -d
 
 YesPlayMusic 地址为 `http://localhost`
 
+## ⚙️ 部署至 Replit
+
+1. 新建 Repl，选择 Bash 模板
+
+2. 在 Replit shell 中运行以下命令
+
+```sh
+bash <(curl -s -L https://raw.githubusercontent.com/qier222/YesPlayMusic/main/install-replit.sh)
+```
+
+3. 首次运行成功后，只需点击绿色按钮 `Run` 即可再次运行
+
+4. 由于 replit 个人版限制内存为 1G（教育版为 3G），构建过程中可能会失败，请再次运行上述命令或运行以下命令：
+
+```sh
+cd /home/runner/${REPL_SLUG}/music && yarn installl && yarn run build
+```
+
 ## 👷‍♂️ 打包客户端
 
 如果在 Release 页面没有找到适合你的设备的安装包的话，你可以根据下面的步骤来打包自己的客户端。
@@ -142,7 +172,7 @@ YesPlayMusic 地址为 `http://localhost`
 1. 打包 Electron 需要用到 Node.js 和 Yarn。可前往 [Node.js 官网](https://nodejs.org/zh-cn/) 下载安装包。安装 Node.js
    后可在终端里执行 `npm install -g yarn` 来安装 Yarn。
 
-2. 使用 `git clone https://github.com/qier222/YesPlayMusic.git` 克隆本仓库到本地。
+2. 使用 `git clone --recursive https://github.com/qier222/YesPlayMusic.git` 克隆本仓库到本地。
 
 3. 使用 `yarn install` 安装项目依赖。
 
@@ -159,7 +189,7 @@ YesPlayMusic 地址为 `http://localhost`
 
 ## :computer: 配置开发环境
 
-本项目由 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 提供 API，已经包含在本项目的`netease_api`目录。
+本项目由 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 提供 API。
 
 运行本项目
 
@@ -180,9 +210,6 @@ yarn electron:serve
 本地运行 NeteaseCloudMusicApi，或者将 API [部署至 Vercel](#%EF%B8%8F-部署至-vercel)
 
 ```shell
-# 安装依赖
-yarn netease_api:install
-
 # 运行 API （默认 3000 端口）
 yarn netease_api:run
 ```
